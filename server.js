@@ -5,6 +5,8 @@ const dotenv = require("dotenv").config();
 
 const DB = process.env.DATABASE.replace("<PASSWORD>", process.env.DPASS);
 
+const restaurantRoute= require("./routes/restaurant.routes")
+
 const app = express()
 mongoose.connect(DB, {
   useNewUrlParser: true,
@@ -15,6 +17,8 @@ mongoose.connect(DB, {
 
 
 app.use(express.json())
+
+app.use("/api/restaurant",restaurantRoute)
 
 
 app.listen(process.env.PORT,()=>{

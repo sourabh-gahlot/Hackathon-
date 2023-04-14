@@ -1,6 +1,6 @@
 const Restaurant = require("../models/restaurant.model");
 
-exports.addResaturant = async (req, res) => {
+exports.addRestaurant = async (req, res) => {
   if (!req.body) {
     res.status(500).send({
       message: "content cannot be empty",
@@ -17,7 +17,7 @@ exports.addResaturant = async (req, res) => {
       rating: req.body.rating,
     });
 
-    req.status(200).json({
+    res.status(200).json({
       status: "sucess",
       data: {
         newRestaurant,
@@ -48,5 +48,27 @@ exports.allRestaurants  = async (req, res) =>{
       })
   }
 }
+
+exports.restaurantCategories = async (req, res) =>{
+
+  try{
+  
+      const categoryArray = await Restaurant.find({}, {category:1})
+  
+      const allCategories = categoryArray.map((result) => result.category);
+  
+      res.status(200).send(
+          allCategories
+      )
+  
+  } catch(err){
+  
+          console.log("Error fetching categories", err);
+              return res.status(500).send({
+              message: "Some error occured while fetching categories."
+          })
+      }
+  
+  }
 
 
