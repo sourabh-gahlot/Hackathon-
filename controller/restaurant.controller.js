@@ -28,3 +28,25 @@ exports.addResaturant = async (req, res) => {
     res.status(500).json("server error");
   }
 };
+
+exports.allRestaurants  = async (req, res) =>{
+
+  try{
+
+      const restaurants = await Restaurant.find();
+
+      res.status(200).send({
+          restaurants : restaurants,
+          message : "Restaurants fetched Successfully"
+      })
+  }
+  catch(err){
+
+      console.log("Error fetching Restaurant", err);
+          return res.status(500).send({
+          message: "Some error occured while fetching the Restaurants."
+      })
+  }
+}
+
+
