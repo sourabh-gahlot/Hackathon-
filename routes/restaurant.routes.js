@@ -7,5 +7,6 @@ const restaurantController = require('../controller/restaurant.controller');
 router.route("/add").post(restaurantController.addRestaurant)
 router.route("/").get(restaurantController.allRestaurants)
 router.route("/categories").get(restaurantController.restaurantCategories)
+router.route("/categories/:category").get(restaurantController.restaurantByCategories)
 
 module.exports=router

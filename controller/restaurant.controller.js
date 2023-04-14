@@ -71,4 +71,22 @@ exports.restaurantCategories = async (req, res) =>{
   
   }
 
+  exports.restaurantByCategories = async (req, res) => {
+
+    try{
+
+        const restaurants = await Restaurant.find({category : req.params.category});
+
+        res.status(200).send(restaurants);
+
+    } catch(err){
+
+        console.log("Error fetching categories", err);
+            return res.status(500).send({
+            message: "Some error occured while fetching the Restaurant."
+        })
+    }
+
+}
+
 
